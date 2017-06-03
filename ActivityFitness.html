@@ -152,10 +152,16 @@ set.seed(1234)</code></pre>
 # We notice that both data sets contain columns with all missing values - these will be deleted.  
 
 # Loading the training data set into my R session replacing all missing with &quot;NA&quot;
-trainingset &lt;- read.csv(&quot;E:/Cousera/Module8/Week4/P/writeup/pml-training.csv&quot;, na.strings=c(&quot;NA&quot;,&quot;#DIV/0!&quot;, &quot;&quot;))
+
+library(RCurl)
+train_url &lt;- &quot;https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv&quot;
+test_url &lt;- &quot;https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv&quot;
+
+trainingset &lt;- read.csv(text=getURL(train_url), na.strings=c(&quot;NA&quot;,&quot;#DIV/0!&quot;, &quot;&quot;))
+
 
 # Loading the testing data set 
-testingset &lt;- read.csv(&quot;E:/Cousera/Module8/Week4/P/writeup/pml-testing.csv&quot; , na.strings=c(&quot;NA&quot;,&quot;#DIV/0!&quot;, &quot;&quot;))
+testingset &lt;- read.csv(text=getURL(test_url), na.strings=c(&quot;NA&quot;,&quot;#DIV/0!&quot;, &quot;&quot;))
 
 # Check dimensions for number of variables and number of observations
 dim(trainingset)</code></pre>

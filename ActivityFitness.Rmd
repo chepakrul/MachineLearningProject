@@ -3,8 +3,8 @@ title: "Practical Machine Learning Course Project"
 author: "CHE PAKRUL AZMI"
 date: "June 3, 2017"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 bibliography: bibliography.bib
 ---
 
@@ -48,17 +48,22 @@ First we want to load the data sets into R and make sure that missing values are
 Irrelevant variables will be deleted.
 
 Results will be hidden from the report for clarity and space considerations.
-
-```{r cache=TRUE}
+```{r cache=TRUE, message=FALSE}
 # After saving both data sets into my working directory
 # Some missing values are coded as string "#DIV/0!" or "" or "NA" - these will be changed to NA.
 # We notice that both data sets contain columns with all missing values - these will be deleted.  
 
 # Loading the training data set into my R session replacing all missing with "NA"
-trainingset <- read.csv("E:/Cousera/Module8/Week4/P/writeup/pml-training.csv", na.strings=c("NA","#DIV/0!", ""))
+
+library(RCurl)
+train_url <- "https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"
+test_url <- "https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"
+
+trainingset <- read.csv(text=getURL(train_url), na.strings=c("NA","#DIV/0!", ""))
+
 
 # Loading the testing data set 
-testingset <- read.csv("E:/Cousera/Module8/Week4/P/writeup/pml-testing.csv" , na.strings=c("NA","#DIV/0!", ""))
+testingset <- read.csv(text=getURL(test_url), na.strings=c("NA","#DIV/0!", ""))
 
 # Check dimensions for number of variables and number of observations
 dim(trainingset)
